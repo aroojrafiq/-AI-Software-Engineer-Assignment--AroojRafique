@@ -1,0 +1,103 @@
+{%- style -%}
+  .purelane-shop-sec { padding: clamp(26px,3.4vw,40px) 0; background: transparent; }
+  .purelane-panel-head { text-align: center; margin-bottom: 26px; padding: 0 18px; }
+  .purelane-kicker { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(36,26,61,.56); }
+  .purelane-d2 { font-family: 'Outfit', sans-serif; font-size: clamp(30px, 4.6vw, 54px); font-weight: 800; line-height: .94; text-transform: uppercase; color: #17102b; margin: 12px 0; }
+  .purelane-rule { display: flex; align-items: center; justify-content: center; gap: 13px; margin: 0 auto; max-width: 240px; }
+  .purelane-rule i { height: 1px; flex: 1; }
+  .purelane-rule i:first-child { background: linear-gradient(90deg, transparent, rgba(75,58,143,.34)); }
+  .purelane-rule i:last-child { background: linear-gradient(90deg, rgba(75,58,143,.34), transparent); }
+  .purelane-rule svg { width: 16px; height: 16px; color: #b8701c; flex: 0 0 auto; }
+
+  .purelane-shelf { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); max-width: 1180px; margin: 0 auto; padding: 0 18px; }
+  @media(min-width: 860px){ .purelane-shelf { grid-template-columns: repeat(4, 1fr); } }
+
+  /* Card uses .glass (stronger) */
+  .purelane-card {
+    padding: 16px; display: flex; flex-direction: column; transition: transform .4s cubic-bezier(.2,.7,.2,1);
+    /* .glass applied via class */
+  }
+  .purelane-card:hover { transform: translateY(-5px); }
+  .purelane-card:focus-visible { outline: 2px solid #b8701c; outline-offset: 3px; border-radius: 26px; }
+
+  .purelane-shot {
+    height: 150px; border-radius: 14px; margin-bottom: 14px; display: grid; place-items: center; position: relative; overflow: hidden;
+    background: linear-gradient(160deg, rgba(255,255,255,.60), rgba(236,230,247,.42));
+    border: 1px solid rgba(75,58,143,.10);
+  }
+  .purelane-shot img { max-height: 122px; width: auto; object-fit: contain; filter: drop-shadow(0 8px 13px rgba(0,74,66,.13)); }
+  .no-image-text { font-size: 11px; color: rgba(36,26,61,.56); font-weight: 600; }
+
+  .purelane-pill {
+    position: absolute; top: 9px; left: 9px; font-size: 8.5px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase;
+    padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,.86); border: 1px solid rgba(201,118,29,.34); color: #4f7d10; z-index: 2;
+  }
+  .purelane-pill.sold-out { color: #d13a3a; border-color: rgba(209, 58, 58, 0.34); }
+
+  .purelane-image-link { display: contents; }
+  .purelane-title-link { text-decoration: none; color: inherit; }
+  .purelane-title-link:focus-visible { outline: 2px solid #b8701c; outline-offset: 3px; border-radius: 4px; }
+
+  .purelane-card h4 {
+    font-family: 'Outfit', sans-serif; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+    color: #17102b; line-height: 1.2; margin-bottom: 7px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    transition: color 0.3s ease;
+  }
+  .purelane-card:hover h4 { color: #b8701c; }
+
+  .purelane-rate { font-size: 11.5px; color: rgba(36,26,61,.78); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+  .purelane-rate b { color: #b8701c; font-weight: 700; }
+
+  .purelane-pr { margin-top: auto; display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+  .purelane-pr strong { font-family: 'Outfit', sans-serif; font-size: 18px; color: #17102b; font-weight: 700; }
+  .purelane-pr s { font-size: 12px; color: rgba(36,26,61,.56); }
+  .purelane-pr em { font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .08em; color: #b8701c; }
+
+  .purelane-btn-ghost-sm {
+    width: 100%; justify-content: center; display: inline-flex; align-items: center;
+    height: 38px; padding: 0 18px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; background: rgba(255,255,255,.66); border: 1px solid rgba(75,58,143,.22); color: #01423b;
+    cursor: pointer; transition: 0.3s;
+  }
+  .purelane-btn-ghost-sm:hover:not([disabled]) { background: rgba(255,255,255,.9); transform: translateY(-2px); }
+  .purelane-btn-ghost-sm:focus-visible { outline: 2px solid #b8701c; outline-offset: 3px; }
+{%- endstyle -%}
+
+<section class="purelane-shop-sec" data-scene="3">
+  <div class="purelane-panel-head">
+    <span class="purelane-kicker">{{ section.settings.kicker_text }}</span>
+    <h2 class="purelane-d2">{{ section.settings.heading_text }}</h2>
+    <div class="purelane-rule">
+      <i></i>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg>
+      <i></i>
+    </div>
+  </div>
+
+  <div class="purelane-shelf">
+    {%- assign collection = section.settings.shop_collection -%}
+    {%- for product in collection.products limit: section.settings.products_to_show -%}
+      {% render 'product-card', product: product %}
+    {%- else -%}
+      <p style="grid-column: 1 / -1; text-align: center;">Please select a collection in the theme editor.</p>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Shop Grid",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "kicker_text", "label": "Kicker", "default": "Bestsellers" },
+    { "type": "text", "id": "heading_text", "label": "Heading", "default": "Loved by 30,000 homes" },
+    { "type": "collection", "id": "shop_collection", "label": "Product Collection" },
+    { "type": "range", "id": "products_to_show", "min": 4, "max": 12, "step": 4, "default": 8, "label": "Products to show" }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Shop Grid"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,377 @@
+{%- style -%}
+  /* --- FORCE DAWN BACKGROUND TRANSPARENT --- */
+  body, .gradient, .color-scheme-1, .color-scheme-2 { background: transparent !important; }
+
+  /* --- HERO SPECIFIC STYLES --- */
+  purelane-hero {
+    position: relative; z-index: 2; min-height: 100svh;
+    display: flex; align-items: flex-end;
+    padding: 150px 0 34px; 
+    /* REMOVED overflow: hidden; as per reviewer feedback to prevent clipping */
+  }
+  purelane-hero::before {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(102deg, rgba(255,255,255,.80) 0%, rgba(255,255,255,.50) 30%, rgba(255,255,255,.12) 54%, transparent 68%);
+  }
+  @media(max-width: 900px){
+    purelane-hero::before {
+      background: linear-gradient(180deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.34) 36%, rgba(255,255,255,.66) 100%);
+    }
+  }
+
+  .hero-grid { max-width: 1180px; margin: 0 auto; padding: 0 18px; width: 100%; position: relative; z-index: 2; }
+  
+  /* --- PRODUCTION BREAKPOINT LOGIC FIX --- */
+  /* Caps the text container so it physically cannot hit the 50vw bottle container */
+  .hero-copy { max-width: 520px; position: relative; z-index: 3; }
+  @media(max-width: 1200px){ .hero-copy { max-width: 440px; } }
+  @media(max-width: 900px){ .hero-copy { max-width: none; } }
+  
+  .purelane-d1 { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: -.018em; font-weight: 800; line-height: .87; color: #17102b; font-size: clamp(48px,8.6vw,112px); margin: 0 0 20px; }
+  .purelane-lime { color: #b8701c; }
+  
+  /* Replaced buggy 44ch with a strict 420px max-width to ensure safe wrapping across all fonts */
+  .purelane-lede { font-size: clamp(15px,1.35vw,17.5px); color: rgba(36,26,61,.78); max-width: 420px; margin-bottom: 26px; }
+  
+  .purelane-rule { display: flex; align-items: center; gap: 13px; margin: 0 0 20px; max-width: 270px; }
+  .purelane-rule i { height: 1px; flex: 1; background: linear-gradient(90deg, rgba(75,58,143,.34), transparent); }
+  .purelane-rule svg { width: 16px; height: 16px; color: #b8701c; flex: 0 0 auto; }
+
+  .hero-cta { display: flex; gap: 11px; flex-wrap: wrap; margin-top: 26px; }
+  .purelane-btn { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 22px; border-radius: 999px; font-size: 12.5px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; transition: .35s cubic-bezier(.2,.7,.2,1); white-space: nowrap; text-decoration: none; border: none; cursor: pointer; }
+  .purelane-btn svg { width: 15px; height: 15px; }
+  .purelane-btn-primary { background: linear-gradient(135deg, #00706a, #004b46); color: #f4fdf6; box-shadow: 0 12px 26px rgba(0,80,74,.26), inset 0 1px 0 rgba(255,255,255,.22); }
+  .purelane-btn-primary:hover { box-shadow: 0 18px 36px rgba(0,80,74,.32), inset 0 1px 0 rgba(255,255,255,.28); transform: translateY(-2px); }
+  .purelane-btn-ghost { background: rgba(255,255,255,.66); border: 1px solid rgba(75,58,143,.22); color: #01423b; }
+  .purelane-btn-ghost:hover { background: rgba(255,255,255,.9); transform: translateY(-2px); }
+
+  /* Badges - Desktop (Removed .rv class as per reviewer feedback) */
+  .purelane-badges { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); width: 96px; z-index: 4; display: flex; flex-direction: column; gap: 2px; padding: 12px 8px; border-radius: 20px; }
+  .purelane-badge { text-align: center; padding: 11px 4px; }
+  .purelane-badge+.purelane-badge { border-top: 1px solid rgba(75,58,143,.12); }
+  .purelane-badge .bi { width: 38px; height: 38px; margin: 0 auto 8px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.62); border: 1px solid rgba(75,58,143,.16); color: #4f7d10; }
+  .purelane-badge .bi svg { width: 19px; height: 19px; }
+  .purelane-badge span { display: block; font-size: 8.5px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; color: rgba(36,26,61,.78); line-height: 1.34; }
+  @media(max-width: 900px){ .purelane-badges { display: none; } }
+
+  /* Badges - Mobile (Kept .rv here as it matches the source) */
+  .purelane-badgestrip { display: flex; gap: 8px; margin-top: 24px; }
+  .purelane-badgestrip div { flex: 1; text-align: center; padding: 11px 6px; border-radius: 14px; font-size: 8.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(36,26,61,.78); line-height: 1.3; }
+  .purelane-badgestrip svg { width: 18px; height: 18px; margin: 0 auto 6px; color: #4f7d10; }
+  @media(min-width: 901px){ .purelane-badgestrip { display: none; } }
+
+  /* Dynamic Carousel Stage */
+  .hero-prod { position: absolute; right: 2%; bottom: 28px; width: min(50vw, 560px); z-index: 2; filter: drop-shadow(0 34px 54px rgba(2,20,19,.6)); }
+  @media(max-width: 1200px){ .hero-prod { width: min(44vw, 440px); right: 3%; } }
+  @media(max-width: 900px){
+    purelane-hero { align-items: flex-end; padding-top: 132px; }
+    .hero-copy { max-width: none; }
+    .hero-prod { position: relative; right: auto; bottom: auto; width: min(88vw, 420px); margin: 20px auto 0; }
+  }
+
+  .hstage { position: relative; width: 100%; height: clamp(380px, 74svh, 680px); }
+  @media(max-width: 900px){ .hstage { height: clamp(300px, 44svh, 430px); } }
+  
+  .hslide { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-end; padding-right: 2%; opacity: 0; pointer-events: none; transition: opacity .85s cubic-bezier(.2,.7,.2,1); }
+  .hslide.on { opacity: 1; pointer-events: auto; }
+  
+  .hp { position: relative; display: block; width: auto; flex: 0 0 auto; opacity: 0; transform: translateY(28px) scale(.94); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); filter: drop-shadow(0 14px 22px rgba(0,74,66,.15)); object-fit: contain; max-width: 100%; max-height: 100%; }
+  .hslide.on .hp { opacity: 1; transform: none; }
+  .hslide.on .hp:nth-child(1) { transition-delay: .06s; }
+  .hslide.on .hp:nth-child(2) { transition-delay: .30s; }
+  .hslide.on .hp:nth-child(3) { transition-delay: .54s; }
+
+  .hp.placeholder-svg { background: #f4f0fb; border-radius: 20px; border: 2px dashed rgba(75,58,143,.22); width: 220px; max-height: 100%; }
+
+  .slide-count-1 .hp { height: 100%; z-index: 3; }
+  .slide-count-2 .hp:nth-child(1) { height: 80%; margin-right: -8%; z-index: 1; }
+  .slide-count-2 .hp:nth-child(2) { height: 97%; z-index: 3; }
+  .slide-count-3 .hp:nth-child(1) { height: 75%; margin-right: -8%; z-index: 1; order: 1; }
+  .slide-count-3 .hp:nth-child(2) { height: 79%; margin-left: -8%; z-index: 2; order: 3; }
+  .slide-count-3 .hp:nth-child(3) { height: 97%; z-index: 3; order: 2; }
+
+  .ptag { position: absolute; left: 0; bottom: 2%; z-index: 6; padding: 11px 14px 12px; border-radius: 16px; max-width: 52%; opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.2,.7,.2,1) .62s, transform .8s cubic-bezier(.2,.7,.2,1) .62s; }
+  .hslide.on .ptag { opacity: 1; transform: none; }
+  .ptag .lbl { display: block; font-size: 9px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; color: #b8701c; }
+  .ptag .val { display: flex; align-items: baseline; gap: 7px; margin-top: 5px; }
+  .ptag .val strong { font-family: 'Outfit', sans-serif; font-size: 23px; font-weight: 800; letter-spacing: -.02em; color: #17102b; line-height: 1; }
+  .ptag .val s { font-size: 12px; color: rgba(36,26,61,.56); }
+  .ptag .cut { display: inline-block; margin-top: 7px; font-size: 8.4px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: rgba(201,118,29,.16); border: 1px solid rgba(201,118,29,.36); color: #4f7d10; }
+
+  .hdots { display: flex; gap: 7px; justify-content: center; align-items: center; margin-top: 8px; }
+  .hdots button { width: 6px; height: 6px; padding: 0; border: none; border-radius: 50%; background: rgba(75,58,143,.22); transition: .4s cubic-bezier(.2,.7,.2,1); cursor: pointer; }
+  .hdots button.on { background: #b8701c; width: 20px; border-radius: 999px; }
+  .hdots button:hover { background: rgba(75,58,143,.4); }
+{%- endstyle -%}
+
+<purelane-hero data-scene="1">
+  <div class="hero-grid">
+    
+    <!-- DESKTOP BADGES (No .rv class) -->
+    <div class="purelane-badges glass-2" aria-label="Product promises">
+      <div class="purelane-badge">
+        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg></span>
+        <span>{{ section.settings.badge_1_text | newline_to_br }}</span>
+      </div>
+      <div class="purelane-badge">
+        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg></span>
+        <span>{{ section.settings.badge_2_text | newline_to_br }}</span>
+      </div>
+      <div class="purelane-badge">
+        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M6.4 17.6 17.6 6.4"/></svg></span>
+        <span>{{ section.settings.badge_3_text | newline_to_br }}</span>
+      </div>
+    </div>
+
+    <!-- MAIN COPY -->
+    <div class="hero-copy">
+      <h1 class="purelane-d1 rv in">
+        {{ section.settings.title_line1 }}<br>
+        {{ section.settings.title_line2 }}<br>
+        <span class="purelane-lime">{{ section.settings.title_accent }}</span>
+      </h1>
+      
+      <div class="purelane-rule rv rv-d1">
+        <i></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg>
+        <i></i>
+      </div>
+
+      <p class="purelane-lede rv rv-d2">{{ section.settings.subtitle }}</p>
+      
+      <div class="hero-cta rv rv-d3">
+        <a class="purelane-btn purelane-btn-primary" href="{{ section.settings.primary_btn_url }}">{{ section.settings.primary_btn_text }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+        </a>
+        <a class="purelane-btn purelane-btn-ghost" href="{{ section.settings.secondary_btn_url }}">{{ section.settings.secondary_btn_text }}</a>
+      </div>
+
+      <!-- MOBILE BADGES (Kept .rv class) -->
+      <div class="purelane-badgestrip rv rv-d4">
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg>
+          {{ section.settings.badge_1_text | strip_html | replace: '\n', ' ' }}
+        </div>
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg>
+          {{ section.settings.badge_2_text | strip_html | replace: '\n', ' ' }}
+        </div>
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M6.4 17.6 17.6 6.4"/></svg>
+          {{ section.settings.badge_3_text | strip_html | replace: '\n', ' ' }}
+        </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC CAROUSEL STAGE -->
+    <div class="hero-prod purelane-hero-prod" id="heroProd">
+      <div class="hstage" id="purelane-hstage">
+        
+        {%- if section.blocks.size == 0 -%}
+          <!-- Empty State -->
+          <div class="hslide slide-count-1 on">
+            {{ 'product-1' | placeholder_svg_tag: 'hp placeholder-svg' }}
+            <div class="glass-2 ptag">
+              <span class="lbl">Add a slide in editor</span>
+              <span class="val"><strong>$0.00</strong></span>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}
+          <!-- SMART FALLBACK: If Product 1 is empty, use the Pricing Product image! -->
+          {%- assign display_p1 = block.settings.product_1 | default: block.settings.bundle_product -%}
+          {%- assign display_p2 = block.settings.product_2 -%}
+          {%- assign display_p3 = block.settings.product_3 -%}
+
+          {%- assign product_count = 0 -%}
+          {%- if display_p1 != blank -%}{% assign product_count = product_count | plus: 1 %}{%- endif -%}
+          {%- if display_p2 != blank -%}{% assign product_count = product_count | plus: 1 %}{%- endif -%}
+          {%- if display_p3 != blank -%}{% assign product_count = product_count | plus: 1 %}{%- endif -%}
+          
+          {%- if product_count == 0 -%}{% assign product_count = 1 %}{%- endif -%}
+
+          <div class="hslide slide-count-{{ product_count }} {% if forloop.first %}on{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            
+            {%- if display_p1 != blank -%}
+              {%- if display_p1.featured_image != blank -%}
+                <img class="hp" src="{{ display_p1.featured_image | image_url: width: 600 }}" alt="{{ display_p1.title | escape }}" loading="lazy">
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'hp placeholder-svg' }}
+              {%- endif -%}
+            {%- elsif display_p2 == blank and display_p3 == blank -%}
+              {{ 'product-1' | placeholder_svg_tag: 'hp placeholder-svg' }}
+            {%- endif -%}
+
+            {%- if display_p2 != blank -%}
+              {%- if display_p2.featured_image != blank -%}
+                <img class="hp" src="{{ display_p2.featured_image | image_url: width: 600 }}" alt="{{ display_p2.title | escape }}" loading="lazy">
+              {%- else -%}
+                {{ 'product-2' | placeholder_svg_tag: 'hp placeholder-svg' }}
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- if display_p3 != blank -%}
+              {%- if display_p3.featured_image != blank -%}
+                <img class="hp" src="{{ display_p3.featured_image | image_url: width: 600 }}" alt="{{ display_p3.title | escape }}" loading="lazy">
+              {%- else -%}
+                {{ 'product-3' | placeholder_svg_tag: 'hp placeholder-svg' }}
+              {%- endif -%}
+            {%- endif -%}
+
+            <div class="glass-2 ptag">
+              <span class="lbl">{{ block.settings.price_label }}</span>
+              <span class="val">
+                <!-- Smart Fallback: Use Pricing product, otherwise use Product 1's price! -->
+                {%- assign target_product = block.settings.bundle_product | default: display_p1 -%}
+                
+                {%- if target_product != blank -%}
+                  <strong>{{ target_product.price | money }}</strong>
+                  {%- if target_product.compare_at_price > target_product.price -%}
+                    <s>{{ target_product.compare_at_price | money }}</s>
+                  {%- endif -%}
+                {%- else -%}
+                  <strong>{{ 0 | money }}</strong>
+                {%- endif -%}
+              </span>
+              {%- if target_product != blank and target_product.compare_at_price > target_product.price -%}
+                {%- assign exact_saving = target_product.compare_at_price | minus: target_product.price -%}
+                <span class="cut">Save {{ exact_saving | money_without_trailing_zeros }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      
+      <!-- DOT CONTROLS -->
+      <div class="hdots" id="purelane-hdots">
+        {%- for block in section.blocks -%}
+          <button type="button" aria-label="Go to slide {{ forloop.index }}" class="{% if forloop.first %}on{% endif %}" data-index="{{ forloop.index0 }}"></button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+  </div>
+</purelane-hero>
+
+<script>
+  if (!customElements.get('purelane-hero')) {
+    customElements.define('purelane-hero', class extends HTMLElement {
+      connectedCallback() {
+        this.stage = this.querySelector('#purelane-hstage');
+        this.slides = this.querySelectorAll('.hslide');
+        this.dots = this.querySelectorAll('#purelane-hdots button');
+        
+        if (this.slides.length <= 1) return;
+
+        this.currentIndex = 0;
+        this.timer = null;
+        this.isIntersecting = false;
+
+        this.dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            this.stopTimer();
+            this.goToSlide(index);
+            this.startTimer();
+          });
+        });
+
+        this.stage.addEventListener('mouseenter', () => this.stopTimer());
+        this.stage.addEventListener('mouseleave', () => this.startTimer());
+
+        if ('IntersectionObserver' in window) {
+          this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              this.isIntersecting = entry.isIntersecting;
+              if (this.isIntersecting) {
+                this.startTimer();
+              } else {
+                this.stopTimer();
+              }
+            });
+          }, { threshold: 0.1 });
+          this.observer.observe(this.stage);
+        } else {
+          this.isIntersecting = true;
+          this.startTimer();
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopTimer();
+        if (this.observer) this.observer.disconnect();
+      }
+
+      goToSlide(index) {
+        this.slides[this.currentIndex].classList.remove('on');
+        if(this.dots[this.currentIndex]) this.dots[this.currentIndex].classList.remove('on');
+        
+        this.currentIndex = index;
+        
+        this.slides[this.currentIndex].classList.add('on');
+        if(this.dots[this.currentIndex]) this.dots[this.currentIndex].classList.add('on');
+      }
+
+      nextSlide() {
+        let nextIndex = (this.currentIndex + 1) % this.slides.length;
+        this.goToSlide(nextIndex);
+      }
+
+      startTimer() {
+        if (!this.timer && this.isIntersecting) {
+          this.timer = setInterval(() => this.nextSlide(), 3800);
+        }
+      }
+
+      stopTimer() {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Purelane Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_line1", "label": "Heading Line 1", "default": "Clean" },
+    { "type": "text", "id": "title_line2", "label": "Heading Line 2", "default": "That" },
+    { "type": "text", "id": "title_accent", "label": "Heading Accent Word", "default": "Lasts" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle Copy", "default": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it." },
+    { "type": "text", "id": "primary_btn_text", "label": "Primary Button Text", "default": "Shop now" },
+    { "type": "url", "id": "primary_btn_url", "label": "Primary Button Link" },
+    { "type": "text", "id": "secondary_btn_text", "label": "Secondary Button Text", "default": "How it works" },
+    { "type": "url", "id": "secondary_btn_url", "label": "Secondary Button Link" },
+    { "type": "header", "content": "Badges" },
+    { "type": "text", "id": "badge_1_text", "label": "Badge 1 Text", "default": "Plant\npowered", "info": "Use enter/return for line breaks on desktop." },
+    { "type": "text", "id": "badge_2_text", "label": "Badge 2 Text", "default": "Safe for\nkids & pets" },
+    { "type": "text", "id": "badge_3_text", "label": "Badge 3 Text", "default": "Zero harsh\nchemicals" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Carousel Combo Slide",
+      "limit": 3,
+      "settings": [
+        { "type": "product", "id": "product_1", "label": "Display Product 1", "info": "If left blank, the image from the Pricing Product will be used." },
+        { "type": "product", "id": "product_2", "label": "Display Product 2 (Optional)" },
+        { "type": "product", "id": "product_3", "label": "Display Product 3 (Optional)" },
+        { "type": "text", "id": "price_label", "label": "Price Label", "default": "SINGLE BOTTLE" },
+        { "type": "product", "id": "bundle_product", "label": "Pricing Source Product", "info": "Select the product to pull the real price and compare-at-price dynamically." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Hero",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

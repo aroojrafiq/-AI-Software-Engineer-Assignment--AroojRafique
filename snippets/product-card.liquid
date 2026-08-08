@@ -1,0 +1,53 @@
+<article class="purelane-card glass rv rv-d{{ forloop.index | modulo: 5 | plus: 1 }}">
+  <div class="purelane-shot">
+    {%- if product.available == false -%}
+      <span class="purelane-pill sold-out">Sold Out</span>
+    {%- else -%}
+      {%- for tag in product.tags -%}
+        {%- assign downcased_tag = tag | downcase -%}
+        {%- if downcased_tag == 'bestseller' or downcased_tag == 'top rated' or downcased_tag == 'new' -%}
+          <span class="purelane-pill">{{ tag }}</span>
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+    
+    {%- if product.featured_image != blank -%}
+      <a href="{{ product.url }}" class="purelane-image-link" aria-label="{{ product.title | escape }}">
+        <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title | escape }}" loading="lazy">
+      </a>
+    {%- else -%}
+      <span class="no-image-text">No Image</span>
+    {%- endif -%}
+  </div>
+  
+  <a href="{{ product.url }}" class="purelane-title-link">
+    <h4>{{ product.title }}</h4>
+  </a>
+  
+  <div class="purelane-rate">
+    <b>★ {{ product.metafields.custom.rating | default: "4.8" }}</b> &middot; {{ product.metafields.custom.review_count | default: "124" }} reviews
+  </div>
+  
+  <div class="purelane-pr">
+    <strong>{{ product.price | money }}</strong>
+    {%- if product.compare_at_price > product.price -%}
+      <s>{{ product.compare_at_price | money }}</s>
+      {%- assign saving = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+      <em>{{ saving }}% off</em>
+    {%- endif -%}
+  </div>
+
+  <!-- Dawn AJAX Wrapper -->
+  <product-form class="product-form">
+    {%- assign form_id = 'add-to-cart-form-' | append: product.id | append: '-' | append: forloop.index -%}
+    {%- form 'product', product, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="purelane-btn-ghost-sm" 
+              {% if product.available == false %}disabled{% endif %}
+              aria-label="{% if product.available %}Add {{ product.title | escape }} to cart{% else %}{{ product.title | escape }} is sold out{% endif %}">
+        {%- if product.available -%}Add to cart{%- else -%}Sold Out{%- endif -%}
+      </button>
+    {%- endform -%}
+  </product-form>
+</article>

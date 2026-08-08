@@ -1,0 +1,180 @@
+{%- style -%}
+  .purelane-bundles-sec {
+    padding: clamp(26px, 3.4vw, 40px) 18px; max-width: 1180px; margin: 0 auto; background: transparent;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  .purelane-header-glass { padding: clamp(26px, 3.4vw, 40px); margin-bottom: 16px; }
+  .purelane-panel-head { text-align: center; }
+  
+  .purelane-kicker { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(36,26,61,.56); }
+  .purelane-d2 { font-family: 'Outfit', sans-serif; font-size: clamp(30px, 4.6vw, 54px); font-weight: 800; line-height: .94; text-transform: uppercase; color: #17102b; margin: 12px 0; letter-spacing: -.018em; }
+  .purelane-lede { font-family: 'Inter', sans-serif; font-size: clamp(15px, 1.35vw, 17.5px); color: rgba(36,26,61,.78); max-width: 44ch; margin: 0 auto; line-height: 1.62; }
+
+  .purelane-tiers { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media(min-width: 760px) { .purelane-tiers { grid-template-columns: repeat(3, 1fr); } }
+
+  .purelane-tier {
+    padding: 24px 22px; transition: transform .4s cubic-bezier(.2,.7,.2,1); display: flex; flex-direction: column;
+  }
+  .purelane-tier:hover { transform: translateY(-5px); }
+  
+  /* Overrides for the "Best Value" tier */
+  .purelane-tier.best {
+    border-color: rgba(201,118,29,.46);
+    box-shadow: 0 22px 54px rgba(58,44,112,.14), 0 0 0 1px rgba(201,118,29,.24), inset 0 1px 0 rgba(255,255,255,.92);
+  }
+
+  .purelane-tag {
+    display: inline-block; font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 999px; margin-bottom: 14px; background: rgba(201,118,29,.14);
+    border: 1px solid rgba(201,118,29,.34); color: #4f7d10; align-self: flex-start;
+  }
+
+  .purelane-tierpix {
+    display: flex; align-items: flex-end; justify-content: center; gap: 2px; height: 78px;
+    margin: -4px 0 16px; padding: 8px 6px; border-radius: 14px;
+    background: linear-gradient(162deg, rgba(255,255,255,.54), rgba(236,230,247,.34));
+    border: 1px solid rgba(75,58,143,.11);
+  }
+  .purelane-tierpix img { max-height: 62px; width: auto; object-fit: contain; filter: drop-shadow(0 5px 8px rgba(0,74,66,.13)); }
+  .purelane-tierpix.five img { max-height: 54px; }
+  
+  @media(max-width: 760px) {
+    .purelane-tierpix { height: 70px; }
+    .purelane-tierpix img { max-height: 54px; }
+    .purelane-tierpix.five img { max-height: 46px; }
+  }
+
+  .purelane-qty { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 52px; line-height: .9; color: #17102b; letter-spacing: -.03em; }
+  .purelane-qty small { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(36,26,61,.56); display: block; margin-top: 6px; }
+
+  .purelane-price { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 27px; color: #b8701c; margin: 16px 0 4px; display: flex; align-items: baseline; gap: 8px; }
+  .purelane-price s { font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(36,26,61,.56); font-weight: 500; }
+
+  .purelane-tier ul { list-style: none; margin: 16px 0 20px; display: grid; gap: 8px; padding: 0; flex-grow: 1; }
+  .purelane-tier li { display: flex; gap: 9px; font-size: 13px; font-family: 'Inter', sans-serif; color: rgba(36,26,61,.78); line-height: 1.5; }
+  .purelane-tier li svg { width: 14px; height: 14px; color: #4f7d10; flex: 0 0 auto; margin-top: 4px; }
+
+  .purelane-btn {
+    width: 100%; justify-content: center; display: inline-flex; align-items: center; height: 46px; border-radius: 999px;
+    font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; transition: .35s cubic-bezier(.2,.7,.2,1); cursor: pointer; border: none;
+  }
+  .purelane-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .purelane-btn-ghost { background: rgba(255,255,255,.66); border: 1px solid rgba(75,58,143,.22); color: #01423b; }
+  .purelane-btn-ghost:hover:not(:disabled) { background: rgba(255,255,255,.9); transform: translateY(-2px); }
+  .purelane-btn-primary { background: linear-gradient(135deg, #00706a, #004b46); color: #f4fdf6; box-shadow: 0 12px 26px rgba(0,80,74,.26), inset 0 1px 0 rgba(255,255,255,.22); }
+  .purelane-btn-primary:hover:not(:disabled) { box-shadow: 0 18px 36px rgba(0,80,74,.32), inset 0 1px 0 rgba(255,255,255,.28); transform: translateY(-2px); }
+{%- endstyle -%}
+
+<section class="purelane-bundles-sec" data-scene="3">
+  <div class="glass-2 purelane-header-glass rv">
+    <div class="purelane-panel-head">
+      <span class="purelane-kicker">{{ section.settings.kicker }}</span>
+      <h2 class="purelane-d2">{{ section.settings.heading }}</h2>
+      <p class="purelane-lede">{{ section.settings.description }}</p>
+    </div>
+  </div>
+
+  <div class="purelane-tiers">
+    {%- for block in section.blocks -%}
+      {%- assign has_five = false -%}
+      {%- if block.settings.included_products.size == 5 -%}
+        {%- assign has_five = true -%}
+      {%- endif -%}
+
+      <article class="purelane-tier glass-2 {% if block.settings.is_best %}best{% endif %} rv rv-d{{ forloop.index | default: 1 }}" {{ block.shopify_attributes }}>
+        <span class="purelane-tag">{{ block.settings.tag }}</span>
+
+        <div class="purelane-tierpix {% if has_five %}five{% endif %}" aria-hidden="true">
+          {%- for product in block.settings.included_products limit: 5 -%}
+            <img src="{{ product.featured_image | image_url: width: 100 }}" alt="{{ product.title | escape }}" loading="lazy">
+          {%- endfor -%}
+        </div>
+
+        <div class="purelane-qty">{{ block.settings.qty }}<small>Products</small></div>
+
+        {%- assign bundle = block.settings.bundle_product -%}
+        <div class="purelane-price">
+          {%- if bundle != blank -%}
+            <strong>{{ bundle.price | money }}</strong>
+            {%- if bundle.compare_at_price > bundle.price -%}
+              <s>{{ bundle.compare_at_price | money }}</s>
+            {%- endif -%}
+          {%- else -%}
+            <strong>{{ 0 | money }}</strong>
+          {%- endif -%}
+        </div>
+
+        <p style="font-family: 'Inter', sans-serif; font-size:12px; color:rgba(36,26,61,.78); margin: 0 0 16px;">{{ block.settings.per_product_text }}</p>
+
+        <ul>
+          {%- if block.settings.feature_1 != blank -%}
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>{{ block.settings.feature_1 }}</li>
+          {%- endif -%}
+          {%- if block.settings.feature_2 != blank -%}
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>{{ block.settings.feature_2 }}</li>
+          {%- endif -%}
+          {%- if block.settings.feature_3 != blank -%}
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>{{ block.settings.feature_3 }}</li>
+          {%- endif -%}
+        </ul>
+
+        {%- if bundle != blank -%}
+          <!-- Dawn AJAX Wrapper -->
+          <product-form class="product-form" style="width: 100%;">
+            {%- assign bundle_form_id = 'bundle-form-' | append: bundle.id | append: '-' | append: forloop.index -%}
+            {%- form 'product', bundle, id: bundle_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ bundle.selected_or_first_available_variant.id }}">
+              <button type="submit" class="purelane-btn {% if block.settings.is_best %}purelane-btn-primary{% else %}purelane-btn-ghost{% endif %}" {% if bundle.available == false %}disabled{% endif %}>
+                {%- if bundle.available -%}
+                  Build this box
+                  {%- if block.settings.is_best -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:16px; margin-left:8px;"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+                  {%- endif -%}
+                {%- else -%}
+                  Sold Out
+                {%- endif -%}
+              </button>
+            {%- endform -%}
+          </product-form>
+        {%- else -%}
+          <button type="button" disabled class="purelane-btn purelane-btn-ghost">Select Bundle in Editor</button>
+        {%- endif -%}
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Bundles",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Build your bundle" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One box. Every room." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Mix and match across kitchen, laundry, home and skin. One flat price, no code needed, free shipping either way." }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Bundle Tier",
+      "settings": [
+        { "type": "checkbox", "id": "is_best", "label": "Highlight as Best Value (Orange)", "default": false },
+        { "type": "text", "id": "tag", "label": "Top Tag", "default": "Starter" },
+        { "type": "text", "id": "qty", "label": "Number of Products", "default": "2" },
+        { "type": "product", "id": "bundle_product", "label": "Pricing & Cart Product", "info": "Select the dummy bundle product to pull pricing and enable Add to Cart." },
+        { "type": "product_list", "id": "included_products", "label": "Products included in this bundle", "limit": 5, "info": "These will be shown as images in the tier. Maximum 5." },
+        { "type": "text", "id": "per_product_text", "label": "Per Product Text", "default": "Flat ₹174 per product" },
+        { "type": "text", "id": "feature_1", "label": "Feature Bullet 1", "default": "Pick any two products" },
+        { "type": "text", "id": "feature_2", "label": "Feature Bullet 2", "default": "Free shipping across India" },
+        { "type": "text", "id": "feature_3", "label": "Feature Bullet 3 (Optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Bundles"
+    }
+  ]
+}
+{% endschema %}
